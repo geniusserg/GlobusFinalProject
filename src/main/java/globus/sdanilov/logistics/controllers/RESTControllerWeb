@@ -1,0 +1,23 @@
+package globus.sdanilov.logistics.controllers;
+
+import globus.sdanilov.logistics.dtos.SensorResponseDto;
+import globus.sdanilov.logistics.models.SensorSnapshotModel;
+import globus.sdanilov.logistics.repositories.SensorValuesRepository;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+@RestController
+public class RESTControllerWeb{
+    private SensorValuesRepository repository;
+    @Autowired
+    RESTControllerWeb(SensorValuesRepository repository){
+        this.repository = repository;
+    }
+    @GetMapping("/sensors")
+    public List<SensorSnapshotModel> getSensorsValue(){
+        return repository.findAll();
+    }
+}
