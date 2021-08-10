@@ -1,0 +1,16 @@
+{
+  "containerValue": 3,
+  "startDate": "2021-10-08T20:00:00.000Z",
+  "maxContainerOffset": 9.7,
+  "frequency": 10,
+  "stepsValue": 5,
+  "params": [
+    {
+      "id": 0,
+      "name": "temperature",
+      "average": 15,
+      "maxDifference": 20.7
+    }
+  ],
+  "syncInterval": 50
+}

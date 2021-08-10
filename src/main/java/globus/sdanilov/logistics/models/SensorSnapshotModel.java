@@ -14,6 +14,7 @@ public class SensorSnapshotModel {
     @GeneratedValue
     private int id;
     private int sensorId;
+    private int containerId;
     private float time;
     private float value;
 
