@@ -13,8 +13,8 @@ public class SensorSnapshotModel {
     @Id
     @GeneratedValue
     private int id;
-    private int sensorId;
     private int containerId;
+    private int sensorId;
     private float time;
     private float value;
 
@@ -22,8 +22,8 @@ public class SensorSnapshotModel {
 
     }
 
-    public SensorSnapshotModel(int id, int sensorId, float time, float value) {
-        this.id = id;
+    public SensorSnapshotModel( float time, int containerId, int sensorId, float value) {
+        this.containerId = containerId;
         this.sensorId = sensorId;
         this.time = time;
         this.value = value;
