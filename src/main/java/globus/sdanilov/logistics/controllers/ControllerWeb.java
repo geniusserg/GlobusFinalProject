@@ -18,13 +18,13 @@ public class ControllerWeb {
     @Autowired
     private SensorValuesRepository repository;
 
-    @GetMapping("/sensor")
+    @GetMapping("/sensors/values")
     public List<SensorSnapshotModel> getSensorsValues(){
         return repository.findAll();
     }
 
-    @PostMapping( value = "/sensor/report")
-    public void postSensorsReport(@RequestBody List<SensorValueCollectorReport> report){
+    @PostMapping( value = "/sensors/report")
+    public String postSensorsReport(@RequestBody List<SensorValueCollectorReport> report){
         for (SensorValueCollectorReport ctr: report){
             for (Snapshot snp : ctr.getSnapshots()){
                 for (int id = 0; id < snp.getValues().size(); id++){
@@ -34,6 +34,7 @@ public class ControllerWeb {
                 }
             }
         }
+        return "ok";
     }
 
 }

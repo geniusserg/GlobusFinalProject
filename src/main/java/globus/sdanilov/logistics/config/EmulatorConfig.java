@@ -30,8 +30,8 @@ public class EmulatorConfig {
         time = 0.9f;
         maxContainerOffset = 2.3f;
         frequency = 5.0f;
-        stepsValue = 10;
-        syncInterval = 8.0f;
+        stepsValue = 100;
+        syncInterval = 30.0f;
         parameters  = new ArrayList<Parameter>();
         parameters.add(new Parameter(0,"temperature", 15.0f, 10.0f));
         parameters.add(new Parameter(1,"vlazhnost", 15.0f, 10.0f));

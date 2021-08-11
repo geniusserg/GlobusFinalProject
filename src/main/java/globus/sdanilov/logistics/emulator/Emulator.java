@@ -14,13 +14,14 @@ public class Emulator implements Runnable{
     private EmulatorConfig params;
     private Random random;
     private Date date;
-
+    private boolean isFinished;
     public List<Snapshot>  snapshots = new ArrayList<Snapshot>();
     private int containerId;
 
     public int getContainerId() {
         return containerId;
     }
+    public boolean isFinished() {return this.isFinished;}
 
     @Override
     public void run() {
@@ -34,6 +35,7 @@ public class Emulator implements Runnable{
                 // wait for random time before snapshot
                 Thread.sleep((long)(nextSnapshotTime*1000.0));
             } catch (InterruptedException e) {
+                isFinished = true;
                 e.printStackTrace();
                 break;
             }
@@ -45,17 +47,18 @@ public class Emulator implements Runnable{
                 values.add(generatedValue);
                 System.out.println(("Generated value "+Float.toString(generatedValue)));
             }
-            snapshots.add(new Snapshot(date.getTime(), values));
+            snapshots.add(new Snapshot(Calendar.getInstance().getTimeInMillis(), values));
 
             //wait for next iteration
             try {
                 Thread.sleep((long)((params.getFrequency()-nextSnapshotTime)*1000.0));
             } catch (InterruptedException e) {
+                isFinished = true;
                 e.printStackTrace();
                 break;
             }
-
         }
+        isFinished = true;
 
     }
 }
