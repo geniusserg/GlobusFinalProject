@@ -11,4 +11,5 @@ import java.util.List;
 public class SensorValueCollectorReport implements Serializable {
     private int containerId;
     private List<Snapshot> snapshots;
+    SensorValueCollectorReport(){}
 }

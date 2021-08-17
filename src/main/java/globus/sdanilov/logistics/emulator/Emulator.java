@@ -1,13 +1,9 @@
 package globus.sdanilov.logistics.emulator;
 
-import globus.sdanilov.logistics.config.EmulatorConfig;
-import globus.sdanilov.logistics.structs.EmulatorParameters;
 import globus.sdanilov.logistics.structs.Parameter;
 import globus.sdanilov.logistics.structs.Snapshot;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.*;
-import java.util.concurrent.ArrayBlockingQueue;
 
 public class Emulator implements Runnable{
 
@@ -22,10 +18,12 @@ public class Emulator implements Runnable{
         return containerId;
     }
     public boolean isFinished() {return this.isFinished;}
+    public Emulator(EmulatorConfig config){
+        this.params = config;
+    }
 
     @Override
     public void run() {
-        params = new EmulatorConfig();
         random = new Random();
         date = new Date();
         random.setSeed(date.getTime());
@@ -43,7 +41,7 @@ public class Emulator implements Runnable{
             //generate new value
             List<Float> values = new ArrayList<>();
             for (Parameter p : params.getParameters()) {
-                float generatedValue = (float) (p.getAverage() + (2.0*random.nextFloat() - 1.0)*p.getDifference());
+                float generatedValue = (float) (p.getAverage() + (2.0*random.nextFloat() - 1.0)*p.getMaxDifference());
                 values.add(generatedValue);
                 System.out.println(("Generated value "+Float.toString(generatedValue)));
             }

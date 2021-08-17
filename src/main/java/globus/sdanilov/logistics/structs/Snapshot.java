@@ -11,6 +11,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 public class Snapshot implements Serializable {
-    private float time;
+    private long time;
     private List<Float> values;
+    Snapshot(){}
 }

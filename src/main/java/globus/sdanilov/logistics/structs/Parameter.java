@@ -11,5 +11,5 @@ public class Parameter {
     private int id;
     private String name;
     private float average;
-    private float difference;
+    private float maxDifference;
 }

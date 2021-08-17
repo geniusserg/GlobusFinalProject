@@ -1,9 +1,6 @@
 package globus.sdanilov.logistics.emulator;
 
-import globus.sdanilov.logistics.config.EmulatorConfig;
 import globus.sdanilov.logistics.structs.SensorValueCollectorReport;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
@@ -14,10 +11,10 @@ public class SensorValueCollector implements Runnable{
     private EmulatorConfig config;
     private List<Emulator> sensors;
     private List<SensorValueCollectorReport> result;
-    private final String URL = "http://localhost:8080/sensor/report";
+    private final String URL = "http://localhost:8080/sensors/report";
     private boolean isFinished;
-    public SensorValueCollector(List<Emulator> sensors){
-        this.config = new EmulatorConfig();
+    public SensorValueCollector(List<Emulator> sensors, EmulatorConfig config){
+        this.config = config;
         this.sensors = sensors;
     }
 
@@ -28,8 +25,8 @@ public class SensorValueCollector implements Runnable{
 
     @Override
     public void run() {
-        result = new ArrayList<>();
         while (true) {
+            result = new ArrayList<>();
             try {
                 Thread.sleep((long) (config.getSyncInterval() * 1000));
             } catch (InterruptedException e) {

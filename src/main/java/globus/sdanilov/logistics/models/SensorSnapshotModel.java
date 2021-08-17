@@ -15,14 +15,14 @@ public class SensorSnapshotModel {
     private int id;
     private int containerId;
     private int sensorId;
-    private float time;
+    private long time;
     private float value;
 
     public SensorSnapshotModel() {
 
     }
 
-    public SensorSnapshotModel( float time, int containerId, int sensorId, float value) {
+    public SensorSnapshotModel( long time, int containerId, int sensorId, float value) {
         this.containerId = containerId;
         this.sensorId = sensorId;
         this.time = time;
