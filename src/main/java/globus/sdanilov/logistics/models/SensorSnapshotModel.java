@@ -28,4 +28,11 @@ public class SensorSnapshotModel {
         this.time = time;
         this.value = value;
     }
+
+    public SensorSnapshotModel(SensorSnapshotModel snapshot) {
+        this.containerId = snapshot.containerId;
+        this.sensorId = snapshot.sensorId;
+        this.time = snapshot.time;
+        this.value = snapshot.value;
+    }
 }

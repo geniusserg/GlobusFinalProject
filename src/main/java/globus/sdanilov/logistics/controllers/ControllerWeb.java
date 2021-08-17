@@ -5,6 +5,8 @@ import globus.sdanilov.logistics.emulator.EmulatorConfig;
 import globus.sdanilov.logistics.emulator.EmulatorService;
 import globus.sdanilov.logistics.models.SensorSnapshotModel;
 import globus.sdanilov.logistics.repositories.SensorValuesRepository;
+import globus.sdanilov.logistics.structs.RangedRequest;
+import globus.sdanilov.logistics.structs.ResponsePagedModel;
 import globus.sdanilov.logistics.structs.SensorValueCollectorReport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 public class ControllerWeb {
@@ -40,8 +43,10 @@ public class ControllerWeb {
     }
 
     @GetMapping("/sensors/values/filtered")
-    public List<SensorSnapshotModel> getSensorsValues(@RequestBody long start, long end){
-        return repository.findByTimeBetween(start, end);
+    public List<SensorSnapshotModel> getSensorsValues(@RequestBody  RangedRequest request){
+        List<SensorSnapshotModel> vals = repository.findByTimeBetween(request.getStart(), request.getEnd());
+        return vals.stream().map((e) -> new ResponsePagedModel(e, request.getRecordsOnPage())).collect(Collectors.toList());
+
     }
 
     @GetMapping("/sensors/values")
